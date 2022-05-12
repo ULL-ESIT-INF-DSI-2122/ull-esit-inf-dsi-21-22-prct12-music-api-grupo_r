@@ -8,7 +8,7 @@ interface ArtistInterface extends Document {
   name: string,
   genres: string[],
   songs: any[],
-  listeners: number,
+  audience: number,
 }
 
 /**
@@ -28,7 +28,7 @@ const ArtistSchema = new Schema({
     },
   },
   genres: {
-    type: String,
+    type: Array,
     required: true,
     trim: true,
     validate: (value: string[]) => {
@@ -44,12 +44,12 @@ const ArtistSchema = new Schema({
     type: Object,
     required: true,
   },
-  listeners: {
+  audience: {
     type: Number,
     required: true,
     validate: (value: number) => {
       if (value < 0) {
-        throw new Error('Los oyentes mensuales no pueden ser negativos');
+        throw new Error('Los oyentes no puede ser negativa');
       }
     },
   },
