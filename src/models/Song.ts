@@ -16,7 +16,7 @@ interface SongInterface extends Document {
 /**
  * @const SongSchema Song's schema
  */
-export const SongSchema = new Schema({
+const SongSchema = new Schema({
   name: {
     type: String,
     required: true,

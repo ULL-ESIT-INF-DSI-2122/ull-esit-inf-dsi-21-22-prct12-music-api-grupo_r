@@ -49,7 +49,7 @@ const ArtistSchema = new Schema({
     required: true,
     validate: (value: number) => {
       if (value < 0) {
-        throw new Error('Los oyentes no puede ser negativa');
+        throw new Error('Los oyentes mensuales no pueden ser negativos');
       }
     },
   },
