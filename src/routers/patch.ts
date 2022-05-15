@@ -170,9 +170,9 @@ patchRouter.patch('/playlist', async (req, res) => {
   }
 });
 
-patchRouter.patch('/song/:id', async (req, res) => {
+patchRouter.patch('/playlist/:id', async (req, res) => {
   // eslint-disable-next-line max-len
-  const allowedUpdates = ['name', 'author', 'length', 'genres', 'single', 'plays'];
+  const allowedUpdates = ['name', 'songs', 'length', 'genres'];
   const actualUpdates = Object.keys(req.body);
   // eslint-disable-next-line max-len
   const isValidUpdate = actualUpdates.every((update) => allowedUpdates.includes(update));
@@ -185,15 +185,15 @@ patchRouter.patch('/song/:id', async (req, res) => {
 
   try {
     // eslint-disable-next-line max-len
-    const song = await Song.findOneAndUpdate(req.query.name?{name: req.query.name.toString()}:{}, req.body, {
+    const playlist = await Playlist.findOneAndUpdate(req.query.name?{name: req.query.name.toString()}:{}, req.body, {
       new: true,
       runValidators: true,
     });
 
-    if (!song) {
+    if (!playlist) {
       return res.status(404).send();
     }
-    return res.send(song);
+    return res.send(playlist);
   } catch (error) {
     return res.status(400).send(error);
   }

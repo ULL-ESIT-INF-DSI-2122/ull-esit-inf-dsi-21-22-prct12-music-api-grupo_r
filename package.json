@@ -9,7 +9,7 @@
     "heroku-postbuild": "tsc",
     "start": "node dist/index.js",
     "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
-    "test": "mocha"
+    "test": "mocha --timeout 15000"
   },
   "repository": {
     "type": "git",
