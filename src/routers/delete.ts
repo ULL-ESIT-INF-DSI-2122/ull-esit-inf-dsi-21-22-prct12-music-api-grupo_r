@@ -31,11 +31,9 @@ deleteRouter.delete('/song', async (req, res) => {
 deleteRouter.delete('/song/:id', async (req, res) => {
   try {
     const song = await Song.findByIdAndDelete(req.params.id);
-
     if (!song) {
       return res.status(404).send();
     }
-
     return res.send(song);
   } catch (error) {
     return res.status(400).send();

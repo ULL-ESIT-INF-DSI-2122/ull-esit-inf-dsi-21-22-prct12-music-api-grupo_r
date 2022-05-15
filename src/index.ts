@@ -2,6 +2,7 @@ import express from 'express';
 import './db/mongoose';
 import {postRouter} from './routers/post';
 import {getRouter} from './routers/get';
+import {deleteRouter} from './routers/delete';
 import {defaultRouter} from './routers/default';
 import {join} from 'path';
 
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use(express.static(join(__dirname, '../public')));
 app.use(postRouter);
 app.use(getRouter);
+app.use(deleteRouter);
 app.use(defaultRouter);
 
 const port = process.env.PORT || 3000;
