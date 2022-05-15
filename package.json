@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo_r#readme",
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/chai": "^4.3.1",
     "@types/express": "^4.17.13",
     "@types/mocha": "^9.1.0",
