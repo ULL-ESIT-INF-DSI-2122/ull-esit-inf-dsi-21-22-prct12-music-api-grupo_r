@@ -1,7 +1,6 @@
 import express from 'express';
 import {Song} from '../models/Song';
-import {Artist} from '../models/Artist';
-import {Playlist} from '../models/Playlist';
+
 
 export const deleteRouter = express.Router();
 
@@ -12,6 +11,12 @@ deleteRouter.delete('/song', (req, res) => {
   if (!req.query.name) {
     res.status(400).send({
       error: 'Name must be provided',
-    })
+    });
+  } else {
+    Song.findOneAndDelete({name: req.query.name.toString()}).then((song) => {
+      if (!song) {
+        res.status(404).send();
+      }
+    });
   }
 });
