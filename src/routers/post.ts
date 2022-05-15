@@ -10,6 +10,7 @@ export const postRouter = express.Router();
  */
 postRouter.post('/song', async (req, res) => {
   const song = new Song(req.body);
+  console.log(song);
 
   try {
     await song.save();
