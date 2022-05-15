@@ -4,7 +4,7 @@
 AUTHORS:     Marco Antonio Cabrera Hernández
              Mario Hernandez Garcia
              Jonay Mendez Marquez
-DATE:        02-05-2022
+DATE:        22-05-2022
 EMAIL:       alu0101327372@ull.edu.es
 UNIVERSITY:  Universidad de La Laguna
 COURSE:      Desarrollo de Sistemas Informáticos
