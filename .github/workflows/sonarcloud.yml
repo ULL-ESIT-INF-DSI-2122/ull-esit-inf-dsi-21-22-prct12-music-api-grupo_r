@@ -2,7 +2,7 @@ name: SonarCloud
 on:
   push:
     workflow_run:
-      workflows: [ "Coveralls" ]
+      workflows: [ "Tests" ]
       types:
         - completed
     workflow_dispatch:
