@@ -1,4 +1,4 @@
-import 'mocha';
+/**import 'mocha';
 import chai from 'chai';
 import {expect} from 'chai';
 import chaiHttp from 'chai-http';
@@ -81,3 +81,4 @@ describe('Get request test', () => {
     });
   });
 });
+*/
