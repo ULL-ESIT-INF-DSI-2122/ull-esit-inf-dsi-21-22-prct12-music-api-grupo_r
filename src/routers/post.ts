@@ -11,8 +11,7 @@ export const postRouter = express.Router();
 postRouter.post('/song', async (req, res) => {
   const song = new Song(req.body);
   console.log('SONG ID:\n'+ song);
-  console.log('REQUEST:\n' +req);
-  console.log('REQUEST BODY:\n' +req.body);
+  console.log('REQUEST BODY:\n' +JSON.parse(req.body));
 
   try {
     await song.save();
