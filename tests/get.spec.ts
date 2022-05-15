@@ -5,6 +5,9 @@ import chaiHttp from 'chai-http';
 
 chai.use(chaiHttp);
 const url = 'https://musictronik360.herokuapp.com';
+// vv COMMENT THE LINE BELLOW TO ENABLE CONSOLE.LOGS FROM THE FUNCTIONS (DISABLED BECAUSE BLOATS THE TESTS REPORT ) vvvv
+console.log = function() {};
+// ^^ COMMENT THE LINE ABOVE TO ENABLE CONSOLE.LOGS FROM THE FUNCTIONS (DISABLED BECAUSE BLOATS THE TESTS REPORT ) ^^^^
 
 describe('Get request test', () => {
   describe('Get all the songs', () => {

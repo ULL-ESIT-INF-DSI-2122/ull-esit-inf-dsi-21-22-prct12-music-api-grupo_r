@@ -7,11 +7,7 @@ import chaiHttp from 'chai-http';
 chai.use(chaiHttp);
 const url = 'https://musictronik360.herokuapp.com';
 
-// vv COMMENT THE LINE BELLOW TO ENABLE CONSOLE.LOGS FROM THE FUNCTIONS (DISABLED BECAUSE BLOATS THE TESTS REPORT ) vvvv
-//console.log = function() {};
-// ^^ COMMENT THE LINE ABOVE TO ENABLE CONSOLE.LOGS FROM THE FUNCTIONS (DISABLED BECAUSE BLOATS THE TESTS REPORT ) ^^^^
-
-describe('Insert a song: ', () => {
+describe('Post request test: ', () => {
   it('Should insert a song', (done) => {
     chai.request(url).post('/song').send({
       name: 'All of me',
@@ -31,10 +27,6 @@ describe('Insert a song: ', () => {
       done();
     });
   });
-});
-
-
-describe('Insert an artist: ', () => {
   it('Should insert a artist', (done) => {
     chai.request(url).post('/artist').send({
       name: 'Jonh Legend',
@@ -54,10 +46,6 @@ describe('Insert an artist: ', () => {
       done();
     });
   });
-});
-
-
-describe('Insert an playlist: ', () => {
   it('Should insert a playlist', (done) => {
     chai.request(url).post('/playlist').send({
       name: 'Veranito sin DSI',
