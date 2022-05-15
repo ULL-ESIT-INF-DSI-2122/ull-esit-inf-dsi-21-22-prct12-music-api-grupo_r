@@ -1,7 +1,7 @@
 import express from 'express';
 import {Song} from '../models/Song';
-// import {Artist} from '../models/Artist';
-// import {Playlist} from '../models/Playlist';
+import {Artist} from '../models/Artist';
+import {Playlist} from '../models/Playlist';
 
 export const patchRouter = express.Router();
 
@@ -35,6 +35,136 @@ patchRouter.patch('/song', async (req, res) => {
     }
 
     return res.send(song);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+});
+
+patchRouter.patch('/song/:id', async (req, res) => {
+  // eslint-disable-next-line max-len
+  const allowedUpdates = ['name', 'author', 'length', 'genres', 'single', 'plays'];
+  const actualUpdates = Object.keys(req.body);
+  // eslint-disable-next-line max-len
+  const isValidUpdate = actualUpdates.every((update) => allowedUpdates.includes(update));
+
+  if (!isValidUpdate) {
+    return res.status(400).send({
+      error: 'Update is not permitted',
+    });
+  }
+
+  try {
+    // eslint-disable-next-line max-len
+    const song = await Song.findOneAndUpdate(req.query.name?{name: req.query.name.toString()}:{}, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!song) {
+      return res.status(404).send();
+    }
+    return res.send(song);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+});
+
+
+patchRouter.patch('/artist', async (req, res) => {
+  if (!req.query.name) {
+    return res.status(400).send({
+      error: 'A name must be provided',
+    });
+  }
+  // eslint-disable-next-line max-len
+  const allowedUpdates = ['name', 'genres', 'songs', 'audience'];
+  const actualUpdates = Object.keys(req.body);
+  const isValidUpdate =
+    actualUpdates.every((update) => allowedUpdates.includes(update));
+
+  if (!isValidUpdate) {
+    return res.status(400).send({
+      error: 'Update is not permitted',
+    });
+  }
+
+  try {
+    // eslint-disable-next-line max-len
+    const artist = await Artist.findOneAndUpdate({name: req.query.name.toString()}, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!artist) {
+      return res.status(404).send();
+    }
+
+    return res.send(artist);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+});
+
+patchRouter.patch('/artist/:id', async (req, res) => {
+  // eslint-disable-next-line max-len
+  const allowedUpdates = ['name', 'genres', 'songs', 'audience'];
+  const actualUpdates = Object.keys(req.body);
+  // eslint-disable-next-line max-len
+  const isValidUpdate = actualUpdates.every((update) => allowedUpdates.includes(update));
+
+  if (!isValidUpdate) {
+    return res.status(400).send({
+      error: 'Update is not permitted',
+    });
+  }
+
+  try {
+    // eslint-disable-next-line max-len
+    const artist = await Artist.findOneAndUpdate(req.query.name?{name: req.query.name.toString()}:{}, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!artist) {
+      return res.status(404).send();
+    }
+    return res.send(artist);
+  } catch (error) {
+    return res.status(400).send(error);
+  }
+});
+
+
+patchRouter.patch('/playlist', async (req, res) => {
+  if (!req.query.name) {
+    return res.status(400).send({
+      error: 'A name must be provided',
+    });
+  }
+  // eslint-disable-next-line max-len
+  const allowedUpdates = ['name', 'songs', 'length', 'genres'];
+  const actualUpdates = Object.keys(req.body);
+  const isValidUpdate =
+    actualUpdates.every((update) => allowedUpdates.includes(update));
+
+  if (!isValidUpdate) {
+    return res.status(400).send({
+      error: 'Update is not permitted',
+    });
+  }
+
+  try {
+    // eslint-disable-next-line max-len
+    const playlist = await Playlist.findOneAndUpdate({name: req.query.name.toString()}, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!playlist) {
+      return res.status(404).send();
+    }
+
+    return res.send(playlist);
   } catch (error) {
     return res.status(400).send(error);
   }
