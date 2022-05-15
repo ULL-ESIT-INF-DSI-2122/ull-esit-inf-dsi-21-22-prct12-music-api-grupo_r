@@ -51,7 +51,7 @@ const SongSchema = new Schema({
     },
   },
   genres: {
-    type: String,
+    type: Array,
     required: true,
     trim: true,
     validate: (value: string[]) => {
