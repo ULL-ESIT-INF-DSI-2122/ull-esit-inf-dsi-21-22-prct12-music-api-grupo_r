@@ -6,7 +6,7 @@ import {Playlist} from '../models/Playlist';
 export const getRouter = express.Router();
 
 /**
- * Get the song by name
+ * Get the song by name.
  */
 getRouter.get('/song', async (req, res) => {
   const filter = req.query.name?{name: req.query.name.toString()}:{};
@@ -24,7 +24,7 @@ getRouter.get('/song', async (req, res) => {
 
 
 /**
- * Get song by id
+ * Get song by id.
  */
 getRouter.get('/song/:id', async (req, res) => {
   try {
@@ -40,7 +40,7 @@ getRouter.get('/song/:id', async (req, res) => {
 
 
 /**
- * Get the artist by name
+ * Get the artist by name.
  */
 getRouter.get('/artist', async (req, res) => {
   const filter = req.query.name?{name: req.query.name.toString()}:{};
@@ -58,7 +58,7 @@ getRouter.get('/artist', async (req, res) => {
 
 
 /**
- * Get artist by id
+ * Get artist by id.
  */
 getRouter.get('/artist/:id', async (req, res) => {
   try {
@@ -73,7 +73,7 @@ getRouter.get('/artist/:id', async (req, res) => {
 });
 
 /**
- * Get the playlist by name
+ * Get the playlist by name.
  */
 getRouter.get('/playlist', async (req, res) => {
   const filter = req.query.name?{name: req.query.name.toString()}:{};
@@ -91,7 +91,7 @@ getRouter.get('/playlist', async (req, res) => {
 
 
 /**
- * Get playlist by id
+ * Get playlist by id.
  */
 getRouter.get('/playlist/:id', async (req, res) => {
   try {

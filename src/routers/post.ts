@@ -1,7 +1,7 @@
 import express from 'express';
 import {Song} from '../models/Song';
 import {Artist} from '../models/Artist';
-// import {Playlist} from '../models/Playlist';
+import {Playlist} from '../models/Playlist';
 
 export const postRouter = express.Router();
 
@@ -10,8 +10,6 @@ export const postRouter = express.Router();
  */
 postRouter.post('/song', async (req, res) => {
   const song = new Song(req.body);
-  console.log('SONG ID:\n'+ song);
-  console.log('REQUEST BODY:\n' +JSON.stringify(req.body));
 
   try {
     await song.save();
@@ -27,6 +25,20 @@ postRouter.post('/artist', async (req, res) => {
   try {
     await artist.save();
     res.status(201).send(artist);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+/**
+ * Post all playlist.
+ */
+postRouter.post('/playlist', async (req, res) => {
+  const playlist = new Playlist(req.body);
+
+  try {
+    await playlist.save();
+    res.status(201).send(playlist);
   } catch (error) {
     res.status(400).send(error);
   }
