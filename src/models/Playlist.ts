@@ -6,7 +6,7 @@ import {Document, Schema, model} from 'mongoose';
  */
 interface PlaylistInterface extends Document {
   name: string,
-  songs: any[],
+  songs: string[],
   length: number,
   genres: string[],
 }
@@ -28,8 +28,17 @@ const PlaylistSchema = new Schema({
     },
   },
   songs: {
-    type: Object,
+    type: [String],
     required: true,
+    trim: true,
+    validate: (value: string[]) => {
+      value.forEach((element) => {
+        if (!element.match(/^[A-Z]/)) {
+          // eslint-disable-next-line max-len
+          throw new Error('Los géneros de la canción deben empezar en mayúscula');
+        }
+      });
+    },
   },
   length: {
     type: Number,
@@ -41,7 +50,7 @@ const PlaylistSchema = new Schema({
     },
   },
   genres: {
-    type: Array,
+    type: [String],
     required: true,
     trim: true,
     validate: (value: string[]) => {

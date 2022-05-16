@@ -7,7 +7,7 @@ import {Document, Schema, model} from 'mongoose';
 interface ArtistInterface extends Document {
   name: string,
   genres: string[],
-  songs: any[],
+  songs: string[],
   audience: number,
 }
 
@@ -28,7 +28,7 @@ const ArtistSchema = new Schema({
     },
   },
   genres: {
-    type: Array,
+    type: [String],
     required: true,
     trim: true,
     validate: (value: string[]) => {
@@ -41,8 +41,17 @@ const ArtistSchema = new Schema({
     },
   },
   songs: {
-    type: Object,
+    type: [String],
     required: true,
+    trim: true,
+    validate: (value: string[]) => {
+      value.forEach((element) => {
+        if (!element.match(/^[A-Z]/)) {
+          // eslint-disable-next-line max-len
+          throw new Error('Los géneros de la canción deben empezar en mayúscula');
+        }
+      });
+    },
   },
   audience: {
     type: Number,

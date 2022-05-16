@@ -5,6 +5,9 @@ import {Playlist} from '../models/Playlist';
 
 export const patchRouter = express.Router();
 
+/**
+ * Update a song.
+ */
 patchRouter.patch('/song', async (req, res) => {
   if (!req.query.name) {
     return res.status(400).send({
@@ -40,6 +43,9 @@ patchRouter.patch('/song', async (req, res) => {
   }
 });
 
+/**
+ * Update a song by ID.
+ */
 patchRouter.patch('/song/:id', async (req, res) => {
   // eslint-disable-next-line max-len
   const allowedUpdates = ['name', 'author', 'length', 'genres', 'single', 'plays'];
@@ -70,6 +76,9 @@ patchRouter.patch('/song/:id', async (req, res) => {
 });
 
 
+/**
+ * Update an artist.
+ */
 patchRouter.patch('/artist', async (req, res) => {
   if (!req.query.name) {
     return res.status(400).send({
@@ -105,6 +114,9 @@ patchRouter.patch('/artist', async (req, res) => {
   }
 });
 
+/**
+ * Update an artist by ID.
+ */
 patchRouter.patch('/artist/:id', async (req, res) => {
   // eslint-disable-next-line max-len
   const allowedUpdates = ['name', 'genres', 'songs', 'audience'];
@@ -135,6 +147,9 @@ patchRouter.patch('/artist/:id', async (req, res) => {
 });
 
 
+/**
+ * Update a playlist.
+ */
 patchRouter.patch('/playlist', async (req, res) => {
   if (!req.query.name) {
     return res.status(400).send({
@@ -170,6 +185,9 @@ patchRouter.patch('/playlist', async (req, res) => {
   }
 });
 
+/**
+ * Update a playlist by ID.
+ */
 patchRouter.patch('/playlist/:id', async (req, res) => {
   // eslint-disable-next-line max-len
   const allowedUpdates = ['name', 'songs', 'length', 'genres'];
