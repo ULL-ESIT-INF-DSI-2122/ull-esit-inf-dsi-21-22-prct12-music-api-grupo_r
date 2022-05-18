@@ -12,7 +12,7 @@ UNIVERSITY:  Universidad de La Laguna
 COURSE:      Desarrollo de Sistemas Informáticos
 ```
 
-<p align='center'>
+<p>
     <a href='https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo_r/actions/workflows/test.js.yml'>
       <img alt='Tests' src='https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct12-music-api-grupo_r/actions/workflows/test.js.yml/badge.svg'/>
     </a>
