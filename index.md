@@ -602,6 +602,8 @@ Por ejemplo, en el workflow de Coveralls tenemos lo siguiente:
         types:
           - completed
 
+
+Por último, e hilando con el siguiente apartado, destacamos que en la carpeta /tests se han incluido las peticiones realizadas y que se han demostrado correctas. Cabe nombrar el hecho de que, para poder realizar las peticiones por ID, se debe contar con la ID de los objetos a manejar.
 Esto implica que la acción "Coveralls" solo se realizará una vez haya terminado la acción "Tests".
 
 **La secuencia establecida es Test ⟶ Coveralls ⟶ Sonarcloud**
