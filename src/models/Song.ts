@@ -32,7 +32,6 @@ const SongSchema = new Schema<SongInterface>({
   author: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
     validate: (value: string) => {
       if (!value.match(/^[A-Z]/)) {
