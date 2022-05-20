@@ -2,8 +2,8 @@ import 'mocha';
 import chai from 'chai';
 import {expect} from 'chai';
 import chaiHttp from 'chai-http';
-require('./get.spec.ts');
 chai.use(chaiHttp);
+require('./get.spec.ts');
 const url = 'https://musictronik360.herokuapp.com';
 
 describe('Get request by id test', () => {

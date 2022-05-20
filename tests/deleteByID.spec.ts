@@ -6,8 +6,7 @@ import chaiHttp from 'chai-http';
  * It's mandatory to post test first post
  * request to be able to check the delete request
  */
-require('./post.spec.ts');
-
+require('./delete.spec.ts');
 chai.use(chaiHttp);
 const url = 'https://musictronik360.herokuapp.com';
 

@@ -30,6 +30,7 @@ const PlaylistSchema = new Schema({
   songs: {
     type: [String],
     required: true,
+    default: undefined,
     trim: true,
     validate: (value: string[]) => {
       value.forEach((element) => {
