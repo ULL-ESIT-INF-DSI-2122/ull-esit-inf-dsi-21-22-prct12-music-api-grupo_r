@@ -9,7 +9,7 @@ const url = 'https://musictronik360.herokuapp.com';
 describe('Update by ID Request: ', () => {
   describe('Update a song: ', () => {
     it('Should update a song by id', (done) => {
-      chai.request(url).patch('/song/6280ed4b8ef8200016a24554').send({
+      chai.request(url).patch('/song/6287d451bb7f4c001642be25').send({
         genres: ['Genero1'],
         name: 'Song',
         author: 'Pepe',

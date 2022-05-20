@@ -9,7 +9,7 @@ const url = 'https://musictronik360.herokuapp.com';
 describe('Get request by id test', () => {
   it('Should get a specific song by id', (done) => {
     // eslint-disable-next-line max-len
-    chai.request(url).get('/song?id=6280ed4b8ef8200016a24554').end((err, res) => {
+    chai.request(url).get('/song?id=6287d451bb7f4c001642be25').end((err, res) => {
       if (err) {
         throw new Error('An error has occur');
       }
