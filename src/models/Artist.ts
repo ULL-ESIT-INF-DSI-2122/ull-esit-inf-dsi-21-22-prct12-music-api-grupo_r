@@ -64,6 +64,7 @@ const ArtistSchema = new Schema<ArtistInterface>({
   audience: {
     type: Number,
     required: true,
+    trim: true,
     validate: (value: number) => {
       if (value < 0) {
         throw new Error('Los oyentes mensuales no pueden ser negativos');

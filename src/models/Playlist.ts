@@ -47,6 +47,7 @@ const PlaylistSchema = new Schema<PlaylistInterface>({
   length: {
     type: Number,
     required: true,
+    trim: true,
     validate: (value: number) => {
       if (value < 0) {
         throw new Error('La duración no puede ser negativa');

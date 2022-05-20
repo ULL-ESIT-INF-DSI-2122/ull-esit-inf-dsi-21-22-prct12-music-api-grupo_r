@@ -44,6 +44,7 @@ const SongSchema = new Schema<SongInterface>({
   length: {
     type: Number,
     required: true,
+    trim: true,
     validate: (value: number) => {
       if (value < 0) {
         throw new Error('La duración no puede ser negativa');
@@ -70,6 +71,7 @@ const SongSchema = new Schema<SongInterface>({
   single: {
     type: Boolean,
     required: true,
+    trim: true,
     validate: (value: boolean) => {
       if (typeof value !== 'boolean') {
         throw new Error('Single es true or false');
@@ -79,6 +81,7 @@ const SongSchema = new Schema<SongInterface>({
   plays: {
     type: Number,
     required: true,
+    trim: true,
     validate: (value: number) => {
       if (value < 0) {
         throw new Error('Las reproducciones no pueden ser negativas');

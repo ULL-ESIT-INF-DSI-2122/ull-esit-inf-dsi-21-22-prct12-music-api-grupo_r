@@ -64,7 +64,7 @@ patchRouter.patch('/song/:id', async (req, res) => {
 
   try {
     // eslint-disable-next-line max-len
-    const song = await Song.findOneAndUpdate(req.query.name?{name: req.query.name.toString()}:{}, req.body, {
+    const song = await Song.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
     });
@@ -135,7 +135,7 @@ patchRouter.patch('/artist/:id', async (req, res) => {
 
   try {
     // eslint-disable-next-line max-len
-    const artist = await Artist.findOneAndUpdate(req.query.name?{name: req.query.name.toString()}:{}, req.body, {
+    const artist = await Artist.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
     });
@@ -206,7 +206,7 @@ patchRouter.patch('/playlist/:id', async (req, res) => {
 
   try {
     // eslint-disable-next-line max-len
-    const playlist = await Playlist.findOneAndUpdate({id: req.params.id}, req.body, {
+    const playlist = await Playlist.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
     });

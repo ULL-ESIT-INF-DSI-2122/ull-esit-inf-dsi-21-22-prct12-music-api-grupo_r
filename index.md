@@ -92,6 +92,7 @@ Partimos desde la base de que tanto 'canciones' como 'artistas' y 'playlists' se
         length: {
           type: Number,
           required: true,
+          trim: true,
           validate: (value: number) => {
             if (value < 0) {
               throw new Error('La duración no puede ser negativa');
@@ -118,6 +119,7 @@ Partimos desde la base de que tanto 'canciones' como 'artistas' y 'playlists' se
         single: {
           type: Boolean,
           required: true,
+          trim: true,
           validate: (value: boolean) => {
             if (typeof value !== 'boolean') {
               throw new Error('Single es true or false');
@@ -127,6 +129,7 @@ Partimos desde la base de que tanto 'canciones' como 'artistas' y 'playlists' se
         plays: {
           type: Number,
           required: true,
+          trim: true,
           validate: (value: number) => {
             if (value < 0) {
               throw new Error('Las reproducciones no pueden ser negativas');
@@ -197,6 +200,7 @@ De forma muy similar se definen los esquemas de un objeto *artist* y un objeto *
       audience: {
         type: Number,
         required: true,
+        trim: true,
         validate: (value: number) => {
           if (value < 0) {
             throw new Error('Los oyentes mensuales no pueden ser negativos');
@@ -245,6 +249,7 @@ De forma muy similar se definen los esquemas de un objeto *artist* y un objeto *
       length: {
         type: Number,
         required: true,
+        trim: true,
         validate: (value: number) => {
           if (value < 0) {
             throw new Error('La duración no puede ser negativa');
@@ -461,7 +466,7 @@ Si al intentar encontrar una canción para modificar, nos topamos con que no exi
 
       try {
         // eslint-disable-next-line max-len
-        const song = await Song.findOneAndUpdate(req.query.name?{name: req.query.name.toString()}:{}, req.body, {
+        const artist = await Artist.findByIdAndUpdate(req.params.id, req.body, {
           new: true,
           runValidators: true,
         });
@@ -475,7 +480,7 @@ Si al intentar encontrar una canción para modificar, nos topamos con que no exi
       }
     });
 
-Esta función es prácticamente idéntica a la anterior, salvo que aprovechando el haber enviado el identificador a través de la query string. Este cambio se ve reflejado en la llamada al método findOneAndUpdate().
+Esta función es prácticamente idéntica a la anterior, salvo que aprovechando el haber enviado el identificador a través de la query string. Este cambio se ve reflejado en la llamada al método findByIdAndUpdate().
 
 ---
 
