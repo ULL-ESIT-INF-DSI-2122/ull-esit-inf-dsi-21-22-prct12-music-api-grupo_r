@@ -140,7 +140,7 @@ Partimos desde la base de que tanto 'canciones' como 'artistas' y 'playlists' se
 
 Cada atributo tiene indicado su tipo tal y como se ha explicado con anterioridad. Además hacemos que todos los atributos sean obligatorios con 'required: true'. Por último, para cada atributo colocamos una función anónima de validación (nos indicará si algún valor introducido al construir un objeto no corresponde con la estructura planeada). 
 
-Por ejemplo, nos aseguramos de que los nombres de los géneros empiecen por mayúscula, para mantener una coherencia con respecto a los datos de nuestro sistema. Además, un factor importante de los validadores (se repite en los tres tipos de objetos) es que las arrays no podrán ser vacías. Por ejemplo, no tiene sentido que una playlist no tenga canciones, o que una canción no tenga géneros musicales asociados.
+Por ejemplo, nos aseguramos de que los nombres de los géneros empiecen por mayúscula, para mantener una coherencia con respecto a los datos de nuestro sistema. Además, un factor importante de los validadores (se repite en los tres tipos de objetos) es que las arrays no podrán ser vacías. No tiene sentido que una playlist no tenga canciones, o que una canción no tenga géneros musicales asociados.
 
 De forma muy similar se definen los esquemas de un objeto *artist* y un objeto *playlist* respectivamente:
 
