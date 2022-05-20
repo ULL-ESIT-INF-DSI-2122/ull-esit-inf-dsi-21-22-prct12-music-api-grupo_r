@@ -206,8 +206,7 @@ patchRouter.patch('/playlist/:id', async (req, res) => {
 
   try {
     // eslint-disable-next-line max-len
-    console.log(req.query.name?{name: req.query.name.toString()}:{});
-    const playlist = await Playlist.findOneAndUpdate(req.query.name?{name: req.query.name.toString()}:{}, req.body, {
+    const playlist = await Playlist.findOneAndUpdate({id: req.params.id}, req.body, {
       new: true,
       runValidators: true,
     });
