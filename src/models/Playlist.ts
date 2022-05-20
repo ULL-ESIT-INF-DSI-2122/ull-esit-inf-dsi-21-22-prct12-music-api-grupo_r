@@ -4,7 +4,7 @@ import {Document, Schema, model} from 'mongoose';
  * @interface PlaylistInterface Implements a playlist.
  * @extends Document
  */
-interface PlaylistInterface extends Document {
+export interface PlaylistInterface extends Document {
   name: string,
   songs: string[],
   length: number,
@@ -12,9 +12,9 @@ interface PlaylistInterface extends Document {
 }
 
 /**
- * @const PlaylistSchema Playlist's schema
+ * @const PlaylistSchema Playlist's schema of type PlaylistInterface
  */
-const PlaylistSchema = new Schema({
+const PlaylistSchema = new Schema<PlaylistInterface>({
   name: {
     type: String,
     required: true,
@@ -30,15 +30,18 @@ const PlaylistSchema = new Schema({
   songs: {
     type: [String],
     required: true,
-    default: undefined,
     trim: true,
     validate: (value: string[]) => {
-      value.forEach((element) => {
-        if (!element.match(/^[A-Z]/)) {
-          // eslint-disable-next-line max-len
-          throw new Error('Los géneros de la canción deben empezar en mayúscula');
-        }
-      });
+      if (value.length === 0) {
+        throw new Error('La playlist debe tener al menos una cancion');
+      } else {
+        value.forEach((element) => {
+          if (!element.match(/^[A-Z]/)) {
+            // eslint-disable-next-line max-len
+            throw new Error('Las canciones deben empezar en mayúscula');
+          }
+        });
+      }
     },
   },
   length: {
@@ -55,17 +58,21 @@ const PlaylistSchema = new Schema({
     required: true,
     trim: true,
     validate: (value: string[]) => {
-      value.forEach((element) => {
-        if (!element.match(/^[A-Z]/)) {
-          // eslint-disable-next-line max-len
-          throw new Error('Los géneros de la canción deben empezar en mayúscula');
-        }
-      });
+      if (value.length === 0) {
+        throw new Error('La playlist debe tener al menos un genero');
+      } else {
+        value.forEach((element) => {
+          if (!element.match(/^[A-Z]/)) {
+            // eslint-disable-next-line max-len
+            throw new Error('Los géneros de la canción deben empezar en mayúscula');
+          }
+        });
+      }
     },
   },
 });
 
 /**
- * @const Playlist
+ * @const Playlist model
  */
 export const Playlist = model<PlaylistInterface>('Playlist', PlaylistSchema);

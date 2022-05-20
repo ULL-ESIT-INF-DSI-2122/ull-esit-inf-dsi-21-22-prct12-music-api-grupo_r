@@ -4,7 +4,7 @@ import {Document, Schema, model} from 'mongoose';
  * @interface ArtistInterface Implements an artist.
  * @extends Document
  */
-interface ArtistInterface extends Document {
+export interface ArtistInterface extends Document {
   name: string,
   genres: string[],
   songs: string[],
@@ -12,9 +12,9 @@ interface ArtistInterface extends Document {
 }
 
 /**
- * @const ArtistSchema Artist's schema
+ * @const ArtistSchema Artist's schema of type ArtistInterface
  */
-const ArtistSchema = new Schema({
+const ArtistSchema = new Schema<ArtistInterface>({
   name: {
     type: String,
     required: true,
@@ -32,12 +32,16 @@ const ArtistSchema = new Schema({
     required: true,
     trim: true,
     validate: (value: string[]) => {
-      value.forEach((element) => {
-        if (!element.match(/^[A-Z]/)) {
-          // eslint-disable-next-line max-len
-          throw new Error('Los géneros de la canción deben empezar en mayúscula');
-        }
-      });
+      if (value.length === 0) {
+        throw new Error('El artista debe tener al menos un género');
+      } else {
+        value.forEach((element) => {
+          if (!element.match(/^[A-Z]/)) {
+            // eslint-disable-next-line max-len
+            throw new Error('Los géneros del artista deben empezar en mayúscula');
+          }
+        });
+      }
     },
   },
   songs: {
@@ -45,12 +49,16 @@ const ArtistSchema = new Schema({
     required: true,
     trim: true,
     validate: (value: string[]) => {
-      value.forEach((element) => {
-        if (!element.match(/^[A-Z]/)) {
-          // eslint-disable-next-line max-len
-          throw new Error('Los géneros de la canción deben empezar en mayúscula');
-        }
-      });
+      if (value.length === 0) {
+        throw new Error('El artista debe tener al menos una cancion');
+      } else {
+        value.forEach((element) => {
+          if (!element.match(/^[A-Z]/)) {
+            // eslint-disable-next-line max-len
+            throw new Error('Las canciones deben empezar en mayúscula');
+          }
+        });
+      }
     },
   },
   audience: {
@@ -65,6 +73,6 @@ const ArtistSchema = new Schema({
 });
 
 /**
- * @const Artist
+ * @const Artist model
  */
 export const Artist = model<ArtistInterface>('Artist', ArtistSchema);

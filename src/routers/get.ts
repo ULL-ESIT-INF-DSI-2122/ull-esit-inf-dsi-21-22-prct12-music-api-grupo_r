@@ -3,6 +3,10 @@ import {Song} from '../models/Song';
 import {Artist} from '../models/Artist';
 import {Playlist} from '../models/Playlist';
 
+/**
+ * @const getRouter Costant that contains the getRouter
+ * that is exported to the main file where express is loaded
+ */
 export const getRouter = express.Router();
 
 /**

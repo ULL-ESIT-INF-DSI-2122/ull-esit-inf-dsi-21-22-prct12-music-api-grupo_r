@@ -4,7 +4,7 @@ import {Document, Schema, model} from 'mongoose';
  * @interface SongInterface Implements a song.
  * @extends Document
  */
-interface SongInterface extends Document {
+export interface SongInterface extends Document {
   name: string,
   author: string,
   length: number,
@@ -14,9 +14,9 @@ interface SongInterface extends Document {
 }
 
 /**
- * @const SongSchema Song's schema
+ * @const SongSchema Song's schema of type SongInterface
  */
-const SongSchema = new Schema({
+const SongSchema = new Schema<SongInterface>({
   name: {
     type: String,
     required: true,
@@ -55,12 +55,16 @@ const SongSchema = new Schema({
     required: true,
     trim: true,
     validate: (value: string[]) => {
-      value.forEach((element) => {
-        if (!element.match(/^[A-Z]/)) {
-          // eslint-disable-next-line max-len
-          throw new Error('Los géneros de la canción deben empezar en mayúscula');
-        }
-      });
+      if (value.length === 0) {
+        throw new Error('La canción debe tener al menos un genero');
+      } else {
+        value.forEach((element) => {
+          if (!element.match(/^[A-Z]/)) {
+            // eslint-disable-next-line max-len
+            throw new Error('Los géneros de la canción deben empezar en mayúscula');
+          }
+        });
+      }
     },
   },
   single: {
@@ -84,6 +88,6 @@ const SongSchema = new Schema({
 });
 
 /**
- * @const Song
+ * @const Song model
  */
 export const Song = model<SongInterface>('Song', SongSchema);

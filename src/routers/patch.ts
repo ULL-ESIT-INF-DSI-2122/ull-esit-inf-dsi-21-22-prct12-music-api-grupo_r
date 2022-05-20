@@ -2,7 +2,10 @@ import express from 'express';
 import {Song} from '../models/Song';
 import {Artist} from '../models/Artist';
 import {Playlist} from '../models/Playlist';
-
+/**
+ * @const patchRouter Costant that contains the patchRouter
+ * that is exported to the main file where express is loaded
+ */
 export const patchRouter = express.Router();
 
 /**
@@ -203,6 +206,7 @@ patchRouter.patch('/playlist/:id', async (req, res) => {
 
   try {
     // eslint-disable-next-line max-len
+    console.log(req.query.name?{name: req.query.name.toString()}:{});
     const playlist = await Playlist.findOneAndUpdate(req.query.name?{name: req.query.name.toString()}:{}, req.body, {
       new: true,
       runValidators: true,

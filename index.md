@@ -103,12 +103,16 @@ Partimos desde la base de que tanto 'canciones' como 'artistas' y 'playlists' se
           required: true,
           trim: true,
           validate: (value: string[]) => {
-            value.forEach((element) => {
-              if (!element.match(/^[A-Z]/)) {
-                // eslint-disable-next-line max-len
-                throw new Error('Los géneros de la canción deben empezar en mayúscula');
-              }
-            });
+            if (value.length === 0) {
+              throw new Error('La canción debe tener al menos un genero');
+            } else {
+              value.forEach((element) => {
+                if (!element.match(/^[A-Z]/)) {
+                  // eslint-disable-next-line max-len
+                  throw new Error('Los géneros de la canción deben empezar en mayúscula');
+                }
+              });
+            }
           },
         },
         single: {
@@ -133,7 +137,7 @@ Partimos desde la base de que tanto 'canciones' como 'artistas' y 'playlists' se
 
 Cada atributo tiene indicado su tipo tal y como se ha explicado con anterioridad. Además hacemos que todos los atributos sean obligatorios con 'required: true'. Por último, para cada atributo colocamos una función anónima de validación (nos indicará si algún valor introducido al construir un objeto no corresponde con la estructura planeada). 
 
-Por ejemplo, nos aseguramos de que los nombres de los géneros empiecen por mayúscula, para mantener una coherencia con respecto a los datos de nuestro sistema.
+Por ejemplo, nos aseguramos de que los nombres de los géneros empiecen por mayúscula, para mantener una coherencia con respecto a los datos de nuestro sistema. Además, un factor importante de los validadores (se repite en los tres tipos de objetos) es que las arrays no podrán ser vacías. Por ejemplo, no tiene sentido que una playlist no tenga canciones, o que una canción no tenga géneros musicales asociados.
 
 De forma muy similar se definen los esquemas de un objeto *artist* y un objeto *playlist* respectivamente:
 
@@ -161,12 +165,16 @@ De forma muy similar se definen los esquemas de un objeto *artist* y un objeto *
         required: true,
         trim: true,
         validate: (value: string[]) => {
-          value.forEach((element) => {
-            if (!element.match(/^[A-Z]/)) {
-              // eslint-disable-next-line max-len
-              throw new Error('Los géneros de la canción deben empezar en mayúscula');
-            }
-          });
+          if (value.length === 0) {
+            throw new Error('El artista debe tener al menos un género');
+          } else {
+            value.forEach((element) => {
+              if (!element.match(/^[A-Z]/)) {
+                // eslint-disable-next-line max-len
+                throw new Error('Los géneros del artista deben empezar en mayúscula');
+              }
+            });
+          }
         },
       },
       songs: {
@@ -174,12 +182,16 @@ De forma muy similar se definen los esquemas de un objeto *artist* y un objeto *
         required: true,
         trim: true,
         validate: (value: string[]) => {
-          value.forEach((element) => {
-            if (!element.match(/^[A-Z]/)) {
-              // eslint-disable-next-line max-len
-              throw new Error('Los géneros de la canción deben empezar en mayúscula');
-            }
-          });
+          if (value.length === 0) {
+            throw new Error('El artista debe tener al menos una cancion');
+          } else {
+            value.forEach((element) => {
+              if (!element.match(/^[A-Z]/)) {
+                // eslint-disable-next-line max-len
+                throw new Error('Las canciones deben empezar en mayúscula');
+              }
+            });
+          }
         },
       },
       audience: {
@@ -218,12 +230,16 @@ De forma muy similar se definen los esquemas de un objeto *artist* y un objeto *
         required: true,
         trim: true,
         validate: (value: string[]) => {
-          value.forEach((element) => {
-            if (!element.match(/^[A-Z]/)) {
-              // eslint-disable-next-line max-len
-              throw new Error('Los géneros de la canción deben empezar en mayúscula');
-            }
-          });
+          if (value.length === 0) {
+            throw new Error('La playlist debe tener al menos una cancion');
+          } else {
+            value.forEach((element) => {
+              if (!element.match(/^[A-Z]/)) {
+                // eslint-disable-next-line max-len
+                throw new Error('Las canciones deben empezar en mayúscula');
+              }
+            });
+          }
         },
       },
       length: {
@@ -240,12 +256,16 @@ De forma muy similar se definen los esquemas de un objeto *artist* y un objeto *
         required: true,
         trim: true,
         validate: (value: string[]) => {
-          value.forEach((element) => {
-            if (!element.match(/^[A-Z]/)) {
-              // eslint-disable-next-line max-len
-              throw new Error('Los géneros de la canción deben empezar en mayúscula');
-            }
-          });
+          if (value.length === 0) {
+            throw new Error('La playlist debe tener al menos un genero');
+          } else {
+            value.forEach((element) => {
+              if (!element.match(/^[A-Z]/)) {
+                // eslint-disable-next-line max-len
+                throw new Error('Los géneros de la canción deben empezar en mayúscula');
+              }
+            });
+          }
         },
       },
     });
@@ -553,6 +573,35 @@ Se desplegará un árbol con todos los ficheros, donde se mostrará los 'describ
 - **deleteByID.spec.ts**: Se realizan tests casi idénticos, salvo que realizando la acción a través del identificador del objeto.
 
 Para realizar las pruebas, se utilizan las propias operaciones que hemos implementado, usando para ello el módulo chai-http, y se verifica su correcto funcionamiento, aprovechando para ello los **mensajes de estado** que hemos ido colocando en cada función.
+
+Además, es importante tener en cuenta que las pruebas tienen una secuencia definida, incluyéndose algunos ficheros .spec dentro de otros. Por ejemplo, y el más visual, es el caso de delete.spec.ts (test de DELETE), que debe realizarse obligatoriamente después del post.spec.ts (test de POST). Esto es porque se probará la operación de borrado con DELETE sobre un objeto creado previamente con POST. 
+
+Dejamos, además, el esquema de dependencias entre los tests para permitir una sencilla comprensión de lo recién nombrado:
+
+- **post.spec.ts**
+- **get.spec.ts**
+- **getByID.spec.ts:** depende de **get.spec.ts**
+- **delete.spec.ts:** depende de **post.spec.ts**
+- **deleteByID.spec.ts:** depende de **deleteByID.spec.ts**
+- **patch.spec.ts**
+- **patchByID.spec.ts:** depende de **patch.spec.ts**
+
+Dicho esto, cabe mencionar que las dependencias necesarias entre las pruebas genera una serie de posibles problemas entre las GitHub Actions. Esto es así porque en los tests se realizan peticiones que, como hemos visto, pueden llegar a entrar en conflicto si no se realizan en el orden adecuado. Por ello, hemos secuenciado también las propias GitHub Actions, añadiendo unas líneas al comienzo de cada fichero.
+
+Por ejemplo, en el workflow de Coveralls tenemos lo siguiente:
+
+    name: Coveralls
+    on:
+      workflow_run:
+        workflows: ["Tests"]
+        types:
+          - completed
+
+Esto implica que la acción "Coveralls" solo se realizará una vez haya terminado la acción "Tests".
+
+**La secuencia establecida es Test ⟶ Coveralls ⟶ Sonarcloud**
+
+*!Importante: Las pruebas se han planteado originalmente para probar las funcionalidades sobre el propio servidor.  n un contexto formal, esta es una mala práctica, pues los tests realizados nunca deben interferir en el funcionamiento habitual de la API. Por lo tanto, lo aconsejable sería realizar las pruebas en un segundo servidor, o incluso en local, donde solo estén los elementos con los que se vayan a realizar los tests. 
 
 <br>
 

@@ -18,7 +18,7 @@
       "require-jsdoc": "off",
       "valid-jsdoc": "off",
       "new-cap": "off",
-      "max-len": "off",
-      "linebreak-style":"off"
+      "linebreak-style":"off",
+      "max-len": "off"
   }
 }
